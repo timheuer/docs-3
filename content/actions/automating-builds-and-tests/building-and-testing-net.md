@@ -45,11 +45,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet-version: ['3.0', '3.1.x', '5.0.x' ]
+        dotnet-version: ['3.1.x', '6.0.x' ]
 
     steps:
       - uses: {% data reusables.actions.action-checkout %}
-      - name: Setup .NET Core SDK {% raw %}${{ matrix.dotnet-version }}{% endraw %}
+      - name: Setup .NET SDK {% raw %}${{ matrix.dotnet-version }}{% endraw %}
         uses: {% data reusables.actions.action-setup-dotnet %}
         with:
           dotnet-version: {% raw %}${{ matrix.dotnet-version }}{% endraw %}
@@ -63,7 +63,7 @@ jobs:
 
 ## Specifying a .NET version
 
-To use a preinstalled version of the .NET Core SDK on a {% data variables.product.prodname_dotcom %}-hosted runner, use the `setup-dotnet` action. This action finds a specific version of .NET from the tools cache on each runner, and adds the necessary binaries to `PATH`. These changes will persist for the remainder of the job.
+To use a preinstalled version of the .NET SDK on a {% data variables.product.prodname_dotcom %}-hosted runner, use the `setup-dotnet` action. This action finds a specific version of .NET from the tools cache on each runner, and adds the necessary binaries to `PATH`. These changes will persist for the remainder of the job.
 
 The `setup-dotnet` action is the recommended way of using .NET with {% data variables.product.prodname_actions %}, because it ensures consistent behavior across different runners and different versions of .NET. If you are using a self-hosted runner, you must install .NET and add it to `PATH`. For more information, see the [`setup-dotnet`](https://github.com/marketplace/actions/setup-net-core-sdk) action.
 
@@ -115,7 +115,7 @@ steps:
 - name: Setup dotnet
   uses: {% data reusables.actions.action-setup-dotnet %}
   with:
-    dotnet-version: '3.1.x'
+    dotnet-version: '6.0.x'
 - name: Install dependencies
   run: dotnet add package Newtonsoft.Json --version 12.0.1
 ```
@@ -134,7 +134,7 @@ steps:
 - name: Setup dotnet
   uses: {% data reusables.actions.action-setup-dotnet %}
   with:
-    dotnet-version: '3.1.x'
+    dotnet-version: '6.0.x'
 - uses: {% data reusables.actions.action-cache %}
   with:
     path: ~/.nuget/packages
@@ -190,7 +190,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet-version: [ '3.0', '3.1.x', '5.0.x' ]
+        dotnet-version: [ '3.1.x', '6.0.x' ]
 
       steps:
         - uses: {% data reusables.actions.action-checkout %}
@@ -232,7 +232,7 @@ jobs:
       - uses: {% data reusables.actions.action-checkout %}
       - uses: {% data reusables.actions.action-setup-dotnet %}
         with:
-          dotnet-version: '3.1.x' # SDK Version to use.
+          dotnet-version: '6.0.x' # SDK Version to use.
           source-url: https://nuget.pkg.github.com/<owner>/index.json
         env:
           NUGET_AUTH_TOKEN: {% raw %}${{secrets.GITHUB_TOKEN}}{% endraw %}
